@@ -1,9 +1,9 @@
 add_library('sound')
 
 n_points = 1000
-point_radius = 3
+point_radius = 6
 base_moveSpeed = 0.2
-base_moveScale = 800
+base_moveScale = 1200
 
 
 
@@ -20,8 +20,12 @@ def setup():
     background("#162a25")
     noStroke()
     pixelDensity(2)
-    colors = [color(floor(random(256)), floor(random(256)),floor(random(256))) for i in range(int(n_points/10))]
-    pos = [{'x': random(width), 'y': random(height), 'c':colors[floor(random(len(colors)))], 'r': random(point_radius)}
+    colors = [color(floor(random(256)), floor(random(256)),floor(random(256))) 
+              for i in range(int(n_points/10))]
+    pos = [{'x': random(width), 
+            'y': random(height), 
+            'c':colors[floor(random(len(colors)))], 
+            'r': random(point_radius)}
            for i in range(n_points)]
 
     mic_in = AudioIn(this, 0)
