@@ -10,16 +10,12 @@ base_moveScale = 1200
 def setup():
     global pos
     global overlay
-    size(1200,  700)
-    # overlay = createImage(900, 600, RGB)
-    # overlay.loadPixels()
-    # for i in range(len(overlay.pixels)):
-    #     overlay.pixels[i] = color(255,255,255, 128)
-    # overlay.updatePixels()
+    size(1200,  700, P2D)
+    smooth(2)
+    pixelDensity(2)
     frameRate(30)
     background("#162a25")
     noStroke()
-    pixelDensity(2)
     colors = [color(floor(random(256)), floor(random(256)),floor(random(256))) 
               for i in range(int(n_points/10))]
     pos = [{'x': random(width), 
@@ -54,11 +50,11 @@ def draw():
         angle = (noise(x / moveScale, y / moveScale) * TWO_PI) * pow(moveScale, 0.25)
         x += cos(angle) * moveSpeed
         y += sin(angle) * moveSpeed
-        fill(min(red(c) + 256*amp, 255), green(c), min(blue(c) + 64 * (1-amp), 255))
+        fill(min(red(c) + 20*moveSpeed, 255), green(c), min(blue(c) + 64 * (1-moveSpeed/3), 255))
         circle(x, y, r)
         # stroke(c)
-        # strokeWeight(4)
-        # curve(pos[i]['x'], pos[i]['y'], pos[i]['x'], pos[i]['y'], x, y, x, y)
+        # strokeWeight(r)
+        # line(pos[i]['x'], pos[i]['y'],  x, y)
         if((x > width) or (x < 0) or (y > height) or (y < 0) or (random(1) < 0.001)):
             x = random(width)
             y = random(height)
@@ -70,12 +66,13 @@ def draw():
  
        
 def mousePressed():
-    # setup()
+    setup()
+    noiseSeed(int(random(12800000)))
     # background(random(1000))
-    noLoop()
+    # noLoop()
     
 
 def mouseReleased():
-    loop()
-    
+    # loop()
     # circle(width/2, height/2, 10)
+    pass
